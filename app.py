@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 import streamlit as st
 from main import stock_analysis
+import plotly.io as pio
+import streamlit.components.v1 as components
 
 
 def run():
@@ -37,7 +39,17 @@ def run():
         # Call the stock analysis function (assuming you have defined it)
         st.write(f"Performing stock analysis for {
             stock} starting on {buy_date.strftime('%Y-%m-%d')} for {months} months.")
-        stock_analysis(stock, buy_date.strftime('%Y-%m-%d %H:%M:%S'), months)
+        fig = stock_analysis(stock, buy_date.strftime(
+            '%Y-%m-%d %H:%M:%S'), months)
+
+        graph_html = pio.to_html(fig, full_html=False)
+
+        # Streamlit App
+        st.title("Plotly Graph in Streamlit")
+
+        # Check if graph_html exists and render it
+        if graph_html:
+            components.html(graph_html, width=1200, height=600)
 
 
 # Run the app

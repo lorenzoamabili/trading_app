@@ -396,4 +396,5 @@ def stock_analysis(stock, buy_day=None, period=6):
     )
 
     # Show the plot
-    fig.show()
+    # fig.show()
+    return fig
