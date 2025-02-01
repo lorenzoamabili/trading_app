@@ -45,7 +45,7 @@ def run():
         graph_html = pio.to_html(fig, full_html=False)
 
         # Streamlit App
-        st.title("Plotly Graph in Streamlit")
+        st.title(f"{stock}")
 
         # Check if graph_html exists and render it
         if graph_html:
