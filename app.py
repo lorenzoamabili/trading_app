@@ -50,7 +50,7 @@ def run():
 
         # Check if graph_html exists and render it
         if graph_html:
-            components.html(graph_html, width=1200, height=600)
+            components.html(graph_html)
 
 
 # Run the app
