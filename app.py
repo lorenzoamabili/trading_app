@@ -49,38 +49,9 @@ def run():
         # Streamlit App
         st.title(f"{stock}")
 
-        # Custom CSS to make the chart scale down on mobile
-        custom_css = """
-            <style>
-                .plot-container {
-                    max-width: 100%;
-                    margin: auto;
-                    display: flex;
-                    justify-content: center;
-                }
-                @media (max-width: 600px) {
-                    .plot-container iframe {
-                        width: 100% !important;
-                        height: 300px !important;  /* Reduce height on small screens */
-                    }
-                }
-            </style>
-        """
-
-        # Streamlit App
-        st.title(f"{stock}")
-
-        # Create a container for responsive design
-        with st.container():
-            st.write(
-                "This graph is optimized for mobile screens and will resize automatically.")
-
-            # Render custom CSS
-            st.markdown(custom_css, unsafe_allow_html=True)
-
-            # Wrap the graph in a div with class "plot-container"
-            components.html(
-                f'<div class="plot-container">{graph_html}</div>', height=600, width=1200)
+        # Check if graph_html exists and render it
+        if graph_html:
+            components.html(graph_html, width=1200, height=600)
 
 
 # Run the app
