@@ -42,7 +42,8 @@ def run():
         fig = stock_analysis(stock, buy_date.strftime(
             '%Y-%m-%d %H:%M:%S'), months)
 
-        graph_html = pio.to_html(fig, full_html=False)
+        graph_html = pio.to_html(fig, full_html=False,
+                                 config={"responsive": True})
 
         # Streamlit App
         st.title(f"{stock}")
