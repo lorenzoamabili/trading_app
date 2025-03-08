@@ -341,15 +341,19 @@ def stock_analysis(stock, buy_day=None, period=6):
     #                          marker=dict(color='rgba(100, 100, 255, 0.6)'),
     #                          showlegend=False))
 
-    # Normalize net_signal for colorscale
-    max_signal = max(np.abs(net_signal.max()), np.abs(net_signal.min()))
-    normalized_signal = np.abs(net_signal) / max_signal
-
     # Define the colorscales
     colorscaleG = [[
         0, "lightgreen"], [0.5, "green"], [1, "darkgreen"]]
     colorscaleR = [[
         0, "lightcoral"], [0.5, "red"], [1, "darkred"]]
+
+    net_signal = net_signal[:len(df)]
+    net_signal = net_signal.reindex(df.index, fill_value=False)
+    net_signal = pd.Series(net_signal, index=df.index)
+
+    # Normalize net_signal for colorscale
+    max_signal = max(np.abs(net_signal.max()), np.abs(net_signal.min()))
+    normalized_signal = np.abs(net_signal) / max_signal
 
     # Add buy markers
     fig.add_trace(go.Scatter(
